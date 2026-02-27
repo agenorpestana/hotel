@@ -19,6 +19,8 @@ if(@$reservas == 'ocultar'){
 <div class="margin_mobile">
 
 	<a onclick="inserir()" type="button" class="btn btn-primary"><span class="fa fa-plus"></span> Reserva</a>
+	<a onclick="inserir('checkin_direto')" type="button" class="btn btn-success"><span class="fa fa-sign-in"></span> Check-in Direto</a>
+	<a href="https://www4.embratur.com.br/fnrh/" target="_blank" class="btn btn-info"><span class="fa fa-id-card"></span> FNRH On-line</a>
 
 
 
@@ -409,6 +411,7 @@ if(@$reservas == 'ocultar'){
 
 
 								<input type="hidden" class="form-control" id="id" name="id">
+								<input type="hidden" class="form-control" id="tipo_fluxo" name="tipo_fluxo" value="reserva">
 
 								<input type="hidden" class="form-control" id="id_quarto">
 
@@ -629,6 +632,14 @@ if(@$reservas == 'ocultar'){
 											<label>OBS</label>
 
 											<input type="text" class="form-control" id="obs_checkin" name="obs_checkin" placeholder="" >							
+
+										</div>
+
+
+
+										<div class="col-md-2" style="margin-top: 25px">
+
+											<a href="https://www4.embratur.com.br/fnrh/" target="_blank" class="btn btn-info">FNRH</a>
 
 										</div>
 

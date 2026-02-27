@@ -860,6 +860,21 @@ setTimeout(function() {
 
 
 
+	function inserir(tipoFluxo = "reserva") {
+		$("#mensagem").text("");
+		$("#modalForm").modal("show");
+		limparCampos();
+		$("#tipo_fluxo").val(tipoFluxo);
+		if(tipoFluxo === "checkin_direto") {
+			$("#titulo_inserir").text("Novo Check-in Direto");
+			$("#btn_form").text("Salvar e Fazer Check-in");
+		} else {
+			$("#titulo_inserir").text("Inserir Reserva");
+			$("#btn_form").text("Salvar Reserva");
+		}
+	}
+
+
 	function selecionar(id){
 
 
