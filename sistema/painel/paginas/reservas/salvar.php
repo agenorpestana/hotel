@@ -24,6 +24,7 @@ $desconto = $_POST['desconto'];
 $forma_pgto = $_POST['forma_pgto'];
 $hospedes_criancas = $_POST['hospedes_criancas'];
 $indicacao = $_POST['indicacao'];
+$tipo_fluxo = @$_POST['tipo_fluxo'];
 $hospedes = $hospedes + $hospedes_criancas;
 
 if($desconto == "" or $desconto < 0){
@@ -123,6 +124,19 @@ if($id == ""){
 
 		$pdo->query("INSERT INTO receber SET descricao = 'Entrada Reserva', valor = '$no_show', data_venc = curDate(), data_lanc = curDate(), usuario_lanc = '$id_usuario', arquivo = 'sem-foto.png', pago = 'Sim', data_pgto = curDate(), usuario_pgto = '$id_usuario', hospede = '$hospede', referencia = 'Entrada', id_ref = '$ultimo_id', forma_pgto = '$forma_pgto', hora = curTime(), caixa = '$id_caixa'");	
 
+	}
+
+	if($tipo_fluxo == 'checkin_direto'){
+		$valor_checkin_direto = $valor_reserva - $no_show;
+		if($valor_checkin_direto < 0){
+			$valor_checkin_direto = 0;
+		}
+
+		$pdo->query("UPDATE reservas SET funcionario_checkin = '$id_usuario', hora_checkin = curTime(), valor_checkin = '$valor_checkin_direto', tipo_pgto_checkin = '$forma_pgto' WHERE id = '$ultimo_id'");
+
+		if($valor_checkin_direto > 0){
+			$pdo->query("INSERT INTO receber SET descricao = 'Restante Reserva', valor = '$valor_checkin_direto', data_venc = curDate(), data_lanc = curDate(), usuario_lanc = '$id_usuario', arquivo = 'sem-foto.png', pago = 'Sim', data_pgto = curDate(), usuario_pgto = '$id_usuario', hospede = '$hospede', referencia = 'Restante', id_ref = '$ultimo_id', forma_pgto = '$forma_pgto', hora = curTime(), caixa = '$id_caixa'");
+		}
 	}
 
 }else{
